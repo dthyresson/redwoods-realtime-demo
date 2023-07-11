@@ -14,13 +14,21 @@ const MAKE_BID = gql`
 `
 
 const AuctionPage = ({ id = 1 }) => {
-  const [bid] = useMutation(MAKE_BID)
+  const [bid, { error }] = useMutation(MAKE_BID)
   const [auctionId, setAuctionId] = useState(id)
   const [amount, setAmount] = useState(10)
+
+  if (error) {
+    alert(error.message)
+  }
 
   return (
     <>
       <MetaTags title="Auction" description="Auction page" />
+      <h1 className="text-xl font-bold">Auction Page</h1>
+
+      <AuctionCell id={auctionId} />
+
       <form>
         <select
           name="id"
@@ -38,7 +46,9 @@ const AuctionPage = ({ id = 1 }) => {
           name="bidAmount"
           type="number"
           defaultValue={amount}
-          onChange={(event) => setAmount(parseInt(event.target.value))}
+          onChange={(event) => {
+            setAmount(parseInt(event.target.value))
+          }}
         />
         <button
           onClick={(e) => {
@@ -55,8 +65,6 @@ const AuctionPage = ({ id = 1 }) => {
           Bid
         </button>
       </form>
-      <h1>AuctionPage</h1>
-      <AuctionCell id={auctionId} />
     </>
   )
 }

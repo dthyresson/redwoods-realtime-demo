@@ -30,5 +30,16 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ auction }: CellSuccessProps) => {
-  return <div>{JSON.stringify(auction)}</div>
+  return (
+    <div>
+      <h1>{auction.title}</h1>
+      <h2>Highest Bid: {auction.highestBid.amount}</h2>
+      <h2>Bids:</h2>
+      <ul>
+        {auction.bids.map((bid, i) => (
+          <li key={`${auction.id}-${i}`}>{bid.amount}</li>
+        ))}
+      </ul>
+    </div>
+  )
 }
