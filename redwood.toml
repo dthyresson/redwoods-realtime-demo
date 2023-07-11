@@ -22,3 +22,6 @@
 
 [experimental.serverFile]
 	enabled = true
+
+[experimental.realtime]
+	enabled = true

@@ -18,14 +18,11 @@ import directives from 'src/directives/**/*.{js,ts}'
 import sdls from 'src/graphql/**/*.sdl.{js,ts}'
 import services from 'src/services/**/*.{js,ts}'
 
-// Import if using RedwoodJS authentication
 // import { authDecoder } from '@redwoodjs/<your-auth-provider>'
 // import { getCurrentUser } from 'src/lib/auth'
 
 import { logger } from 'src/lib/logger'
-
-// Import if using RedwoodJS Realtime via `yarn rw exp setup-realtime`
-// import { realtime } from 'src/lib/realtime'
+import { realtime } from 'src/lib/realtime'
 
 async function serve() {
   // Parse server file args
@@ -85,7 +82,7 @@ async function serve() {
     allowIntrospection: true,
     allowGraphiQL: true,
     // Configure if using RedwoodJS Realtime
-    // realtime,
+    realtime,
   })
 
   // Start
