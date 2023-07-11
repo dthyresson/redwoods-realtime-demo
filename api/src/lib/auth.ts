@@ -1,3 +1,5 @@
+import { ForbiddenError } from '@redwoodjs/graphql-server'
+
 /**
  * Once you are ready to add authentication to your application
  * you'll build out requireAuth() with real functionality. For
@@ -21,5 +23,6 @@ export const hasRole = ({ roles }) => {
 // Roles are passed in by the requireAuth directive if you have auth setup
 // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 export const requireAuth = ({ roles }) => {
-  return isAuthenticated()
+  throw new ForbiddenError("You don't have permission to do that.")
+  // return isAuthenticated()
 }

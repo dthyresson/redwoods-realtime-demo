@@ -10,10 +10,16 @@ const COUNTDOWN_SUBSCRIPTION = gql`
 `
 
 const ListenToCountdown = ({ from = 100, interval = 10 }) => {
-  const { data, loading } = useSubscription(COUNTDOWN_SUBSCRIPTION, {
+  const { data, loading, error } = useSubscription(COUNTDOWN_SUBSCRIPTION, {
     variables: { from, interval },
   })
+
+  if (error) {
+    return <div>{error.message}</div>
+  }
+
   return (
+    !error &&
     !loading && <RenderCountdown countdown={data.countdown}></RenderCountdown>
   )
 }
@@ -62,10 +68,6 @@ const CountdownPage = () => {
           </div>
         </dl>
       </div>
-      <p>
-        My default route is named <code>countdown</code>, link to me with `
-        <Link to={routes.home()}>Back home</Link>`
-      </p>
     </>
   )
 }

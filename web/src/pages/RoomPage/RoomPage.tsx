@@ -34,9 +34,13 @@ function RenderNewMessage({ newMessage }) {
 }
 
 const ListenForNewMessages = ({ roomId }) => {
-  const { data, loading } = useSubscription(NEW_MESSAGE_SUBSCRIPTION, {
+  const { data, loading, error } = useSubscription(NEW_MESSAGE_SUBSCRIPTION, {
     variables: { roomId },
   })
+
+  if (error) {
+    return <div>{error.message}</div>
+  }
 
   if (!loading) {
     return <div className="w-1/2 flex-initial">{RenderNewMessage(data)}</div>
